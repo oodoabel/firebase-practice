@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
@@ -19,6 +21,7 @@ export default function SignInPage() {
       console.log(res);
       setEmail("");
       setPassword("");
+      router.push("/");
     } catch (err) {
       console.error(err);
     }
